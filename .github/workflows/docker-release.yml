@@ -44,8 +44,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Push
-        run: |
-          IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/${{ steps.tagmap.outputs.dir }}
-          docker build -t "$IMAGE:${{ steps.taginfo.outputs.version }}" -t "$IMAGE:latest" ${{ steps.tagmap.outputs.dir }}
-          docker push "$IMAGE:${{ steps.taginfo.outputs.version }}"
-          docker push "$IMAGE:latest"
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ steps.tagmap.outputs.dir }}
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/${{ steps.tagmap.outputs.dir }}:${{ steps.taginfo.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/${{ steps.tagmap.outputs.dir }}:latest
+          platforms: linux/amd64,linux/arm64
