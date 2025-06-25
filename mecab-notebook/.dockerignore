@@ -1,0 +1,29 @@
+# Python キャッシュ・ビルド系
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+
+# Jupyter のバックアップ
+notebooks/.ipynb_checkpoints
+notebooks/**/.ipynb_checkpoints
+
+# OS/IDE 関連
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.env
+*.swp
+*.bak
+
+# Git や Docker 自体
+.git/
+.gitignore
+.dockerignore
+
+# その他
+.envrc
